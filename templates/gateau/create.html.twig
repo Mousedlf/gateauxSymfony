@@ -11,7 +11,42 @@
     {{ form_row(formGateau.name) }}
     {{ form_row(formGateau.description) }}
 
+
+    <ul class="ingredients"
+        data-index="{{ formGateau.ingredients|length > 0 ? formGateau.ingredients|last.vars.name + 1 : 0 }}"
+        data-prototype="{{ form_widget(formGateau.ingredients.vars.prototype)|e('html_attr') }}"
+    ></ul>
+    <button type="button" class="add_item_link btn btn-warning" data-collection-holder-class="ingredients">Ajouter un ingredient</button>
+
+
+
     <button type="submit" class="btn btn-success">Ajouter le gateau</button>
     {{ form_end(formGateau) }}
+
+
+    <script>
+        const addFormToCollection = (e) => {
+            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+            const item = document.createElement('li');
+
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                );
+
+            collectionHolder.appendChild(item);
+            collectionHolder.dataset.index++;
+        };
+
+        document
+            .querySelectorAll('.add_item_link')
+            .forEach(btn => {
+                btn.addEventListener("click", addFormToCollection)
+            });
+
+    </script>
 
 {% endblock %}

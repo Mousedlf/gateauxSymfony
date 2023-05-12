@@ -15,12 +15,14 @@ class GateauType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('ingredient', CollectionType::class, [
+            ->add('ingredients', CollectionType::class, [
                 'entry_type'=>IngredientType::class,
                 'allow_add'=>true,
                 'allow_delete'=>true,
                 'required'=>true,
-                'by_reference'
+                'by_reference'=>false,
+                'disabled'=>false,
+                'prototype'=>true
             ])
         ;
     }

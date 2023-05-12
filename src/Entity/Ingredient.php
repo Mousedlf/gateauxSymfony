@@ -18,7 +18,8 @@ class Ingredient
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gateau $gateaux = null;
+    private ?Gateau $gateau = null;
+
 
     public function getId(): ?int
     {
@@ -37,15 +38,18 @@ class Ingredient
         return $this;
     }
 
-    public function getGateaux(): ?Gateau
+    public function getGateau(): ?Gateau
     {
-        return $this->gateaux;
+        return $this->gateau;
     }
 
-    public function setGateaux(?Gateau $gateaux): self
+    public function setGateau(?Gateau $gateau): self
     {
-        $this->gateaux = $gateaux;
+        $this->gateau = $gateau;
 
         return $this;
     }
+
+
+
 }

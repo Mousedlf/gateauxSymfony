@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Gateau;
+use App\Entity\Ingredient;
 use App\Form\GateauType;
 use App\Repository\GateauRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,13 +35,24 @@ class GateauController extends AbstractController
         $formGateau->handleRequest($request);
         if($formGateau->isSubmitted() && $formGateau->isValid()){
 
+            $ingredients=$formGateau->getData()->getIngredients();
+
+            foreach($ingredients as $ingredient){
+                $newIngredient = new Ingredient();
+                $newIngredient->setName($ingredient->getName());
+                $newIngredient->setGateau($gateau);
+            }
             $manager->persist($gateau);
             $manager->flush();
 
             return $this->redirectToRoute('show_gateau', [
                 'id'=>$gateau->getId()
             ]);
+
+;
         }
+
+
 
         return $this->renderForm('gateau/create.html.twig', [
             'formGateau'=>$formGateau

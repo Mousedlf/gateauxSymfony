@@ -22,8 +22,9 @@ class Gateau
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'gateaux', targetEntity: Ingredient::class)]
+    #[ORM\OneToMany(mappedBy: 'gateau', targetEntity: Ingredient::class, cascade: ['persist'])]
     private Collection $ingredients;
+
 
     public function __construct()
     {
@@ -71,7 +72,7 @@ class Gateau
     {
         if (!$this->ingredients->contains($ingredient)) {
             $this->ingredients->add($ingredient);
-            $ingredient->setGateaux($this);
+            $ingredient->setGateau($this);
         }
 
         return $this;
@@ -81,11 +82,14 @@ class Gateau
     {
         if ($this->ingredients->removeElement($ingredient)) {
             // set the owning side to null (unless already changed)
-            if ($ingredient->getGateaux() === $this) {
-                $ingredient->setGateaux(null);
+            if ($ingredient->getGateau() === $this) {
+                $ingredient->setGateau(null);
             }
         }
 
         return $this;
     }
+
+
+
 }
