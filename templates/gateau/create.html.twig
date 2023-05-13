@@ -19,9 +19,19 @@
     <button type="button" class="add_item_link btn btn-warning" data-collection-holder-class="ingredients">Ajouter un ingredient</button>
 
 
+    <ul class="images"
+        data-index="{{ formGateau.images|length > 0 ? formGateau.images|last.vars.name + 1 : 0 }}"
+        data-prototype="{{ form_widget(formGateau.images.vars.prototype)|e('html_attr') }}"
+    ></ul>
+    <button type="button" class="add_item_link btn btn-warning" data-collection-holder-class="images">Ajouter une image</button>
+
+
 
     <button type="submit" class="btn btn-success">Ajouter le gateau</button>
     {{ form_end(formGateau) }}
+
+
+
 
 
     <script>

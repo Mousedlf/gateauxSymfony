@@ -19,8 +19,18 @@
 
                 {% endfor %}
 
+            {% for image in gateau.images %}
+
+                <img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('vignette') }}" alt="">
+
+            {% endfor %}
+
+
+
+
 
         </div>
+
 
 
 

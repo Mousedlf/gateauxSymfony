@@ -24,6 +24,15 @@ class GateauType extends AbstractType
                 'disabled'=>false,
                 'prototype'=>true
             ])
+            ->add('images', CollectionType::class, [
+                'entry_type'=>ImageType::class,
+                'allow_add'=>true,
+                'allow_delete'=>true,
+                'required'=>true,
+                'by_reference'=>false,
+                'disabled'=>false,
+                'prototype'=>true
+            ])
         ;
     }
 
